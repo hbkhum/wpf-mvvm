@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="WPF.Views.CarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF.Views"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <GroupBox Header="Car Info">
+            <mah:MetroAnimatedSingleRowTabControl>
+                <TabItem Header="Car" Background="{x:Null}">
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="Make:" FontWeight="Bold"    VerticalAlignment="Center"  HorizontalAlignment="Right"></Label>
+                        <Label Grid.Column="0" Grid.Row="1" Content="Model:" FontWeight="Bold"   VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                        <Label Grid.Column="0" Grid.Row="2" Content="VIN:" FontWeight="Bold"   VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                        <Label Grid.Column="0" Grid.Row="3" Content="Color:" FontWeight="Bold"   VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                        <Label Grid.Column="0" Grid.Row="4" Content="Year:" FontWeight="Bold"   VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                        
+                        <DockPanel Grid.Column="1" Grid.Row="0"  >
+                            <TextBox Text="{Binding Car.Make, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors = True}"  VerticalAlignment="Center" mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Make"  />
+                        </DockPanel>
+                        <DockPanel Grid.Column="1" Grid.Row="1"  >
+                            <TextBox Text="{Binding Car.Model, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors = True}"  VerticalAlignment="Center" mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Model"/>
+                        </DockPanel>
+                        <DockPanel Grid.Column="1" Grid.Row="2"  >
+                            <TextBox Text="{Binding Car.VIN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors = True}"  
+                                     VerticalAlignment="Center" mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="VIN"/>
+                        </DockPanel>
+      
+                        <DockPanel Grid.Column="1" Grid.Row="3"  >
+                            <TextBox Text="{Binding Car.Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors = True}"
+                                     VerticalAlignment="Center" mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Color"/>
+                        </DockPanel>
+                        <DockPanel Grid.Column="1" Grid.Row="4"  >
+
+                            <TextBox Text="{Binding Car.Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors = True}"
+                                     VerticalAlignment="Center" mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Work Location"/>
+                        </DockPanel>
+
+                        <Grid Grid.Column="1" Grid.Row="8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Button Grid.Column="2"  Style="{StaticResource AccentedSquareButtonStyle}"   Command="{Binding Path=UpdateCommand}" >
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="Update" FontWeight="Bold" VerticalAlignment="Center" />
+                                        <TextBlock Text=" "/>
+                                        
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="3"    Background="#FFD41F1F" Command="{Binding CancelCommand}">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="Cancel" FontWeight="Bold" VerticalAlignment="Center" />
+                                        <TextBlock Text=" "/>
+                                       
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </Grid>
+
+                    </Grid>
+                </TabItem>
+            </mah:MetroAnimatedSingleRowTabControl>
+        </GroupBox>
+    </Grid>
+</UserControl>

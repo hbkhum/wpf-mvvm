@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="WPF.Views.CarListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF.Views"
+             xmlns:viewCarModel="clr-namespace:WPF.ViewModels.Cars"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" >
+    <DockPanel>
+        <Grid DockPanel.Dock="Left">
+            <GroupBox Header="Car List" Width="380">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="360"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Search:" FontSize="16" FontWeight="Bold"/>
+                        <TextBox  Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Text="{Binding SearchCar,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Row="1"  Grid.Column="2"   Style="{StaticResource AccentedSquareButtonStyle}" Command="{Binding RefreshCarListCommand}" >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text=" "/>
+                            </StackPanel>
+                        </Button>
+                        <Button Grid.Row="1"  Grid.Column="3"    Command="{Binding AddCarCommand}" Background="#FF1C9D35" >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text=" "/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <ListBox Grid.Row="2" SelectedItem="{Binding SelectedCar,Mode=TwoWay}"  ScrollViewer.VerticalScrollBarVisibility="Visible"  ItemsSource="{Binding CarList}"    >
+                        <ListBox.ItemTemplate >
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Make}"  FontSize="18" FontWeight="Bold"/>
+                                    <Grid Grid.Row="1" Grid.Column="1" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Position: " FontSize="12" FontWeight="Normal"  />
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Model}" FontSize="12" FontWeight="Bold"  HorizontalAlignment="Left"   />
+                                    </Grid>
+                                    <Grid Grid.Row="2" Grid.Column="1" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Vehicle: " FontSize="12" FontWeight="Normal"  />
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Year}" FontSize="12" FontWeight="Bold"  HorizontalAlignment="Left"   />
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+
+            </GroupBox>
+        </Grid>
+        <Grid>
+            <DockPanel>
+                <DockPanel.Resources>
+                    <DataTemplate DataType="{x:Type viewCarModel:CarViewModel}">
+                        <local:CarView/>
+                    </DataTemplate>
+                </DockPanel.Resources>
+                <ContentControl  Content="{Binding CarViewModel}"></ContentControl>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
+</UserControl>
